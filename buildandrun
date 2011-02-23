@@ -1,0 +1,17 @@
+#!/bin/sh
+
+JGLOBUS_HOME=$HOME/Projects/JGlobus
+( cd $JGLOBUS_HOME && mvn -DskipTests=true package )
+
+CLASSPATH=$JGLOBUS_HOME/jsse/target/jsse-2.0-SNAPSHOT.jar:$CLASSPATH
+CLASSPATH=$JGLOBUS_HOME/ssl-proxies/target/ssl-proxies-2.0-SNAPSHOT.jar:$CLASSPATH
+CLASSPATH=$JGLOBUS_HOME/gss/target/gss-2.0-SNAPSHOT.jar:$CLASSPATH
+CLASSPATH=$HOME/.m2/repository/org/springframework/org.springframework.core/3.0.1.RELEASE-A/org.springframework.core-3.0.1.RELEASE-A.jar:$CLASSPATH
+CLASSPATH=$HOME/.m2/repository/org/bouncycastle/bcprov-jdk15/1.45/bcprov-jdk15-1.45.jar:$CLASSPATH
+CLASSPATH=$HOME/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar:$CLASSPATH
+CLASSPATH=.:$CLASSPATH
+
+export CLASSPATH
+#echo $CLASSPATH
+
+javac TestPathValidation.java && java TestPathValidation && rm TestPathvalidation.class

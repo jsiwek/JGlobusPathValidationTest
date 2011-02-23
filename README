@@ -1,0 +1,17 @@
+This is a test case to make sure that the JGlobus X.509 certificate
+path validation routines check the signature of a certificate against
+a CA trust root.
+
+There are two sets of certificates provided in the sha1/ and sha2/
+directories.  (They were created for testing differences in certificate
+signature capabilities, but are re-purposed for this test just because
+they are different public keys for a CA of the same name).
+
+The `buildandrun` script can be modified to point to the location of a
+local JGlobus git repository (https://github.com/jglobus/JGlobus.git)
+to build.  It will also execute a test that verifies the signature
+of sha2/hostcert.pem against whatever trust CA roots are in
+$HOME/.globus/certificates.  If the CA cert and signing policy for
+the sha2/ CA with hash 01ac4149 are copied into that directory, the test
+case should succeed.  And the test should fail if the trust roots from
+sha1 directory are copied into $HOME/.globus/certificates.
